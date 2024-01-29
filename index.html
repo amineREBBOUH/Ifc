@@ -26,8 +26,8 @@
 </body>
 <script id="source" type="module">
 
-import {Viewer, WebIFCLoaderPlugin} from 
-"https://cdn.jsdelivr.net/npm/@xeokit/xeokit-sdk/dist/xeokit-sdk.es.min.js";
+
+	import {Viewer, WebIFCLoaderPlugin} from "https://cdn.jsdelivr.net/npm/@xeokit/xeokit-sdk/dist/xeokit-sdk.es.min.js";
 
 const viewer = new Viewer({
     canvasId: "myCanvas",
@@ -39,14 +39,29 @@ viewer.camera.look = [4.400, 3.724, 8.899];
 viewer.camera.up = [-0.018, 0.999, 0.039];
 
 const webIFCLoader = new WebIFCLoaderPlugin(viewer, {
-    // Path to web-ifc.wasm, which does the IFC parsing for us
     wasmPath: "https://cdn.jsdelivr.net/npm/@xeokit/xeokit-sdk/dist/"
 });
 
-const model = webIFCLoader.load({ // Returns an Entity that represents the model
+const model = webIFCLoader.load({
     src: "./Duplex.ifc",
     edges: true
 });
+
+// Add a click event listener to the canvas
+viewer.canvas.canvas.addEventListener('click', (e) => {
+    const hit = viewer.scene.pick({
+        canvasPos: [e.clientX, e.clientY]
+    });
+
+    if (hit) {
+        // An IFC object was clicked
+        // You can access details of the clicked object using 'hit' object
+        console.log("Clicked IFC object ID: ", hit.entity.id);
+
+        // Add further actions here as needed
+    }
+});
+
 
 </script>
 </html>
