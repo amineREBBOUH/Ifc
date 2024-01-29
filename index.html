@@ -52,7 +52,8 @@ viewer.canvas.canvas.addEventListener('click', (e) => {
     const hit = viewer.scene.pick({
         canvasPos: [e.clientX, e.clientY]
     });
-
+console.log("Clicked IFC ");
+	console.log(hit);
     if (hit) {
         // An IFC object was clicked
         // You can access details of the clicked object using 'hit' object
