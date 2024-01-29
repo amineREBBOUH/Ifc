@@ -46,7 +46,9 @@ const model = webIFCLoader.load({
     src: "./Duplex.ifc",
     edges: true
 });
-
+setTimeout(() => {
+  console.log(viewer.canvas.canvas);
+}, 1000);
 // Add a click event listener to the canvas
 viewer.canvas.canvas.addEventListener('click', (e) => {
     const hit = viewer.scene.pick({
